@@ -1,3 +1,7 @@
+# +--------------------------------------------------------------------+
+# |                          TEST SUCCESSFULL                          |
+# +--------------------------------------------------------------------+
+
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import Paragraph
