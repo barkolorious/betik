@@ -142,7 +142,7 @@ class LaTeXConverter:
       return False
 
 def render_latex (text):
-  converter = LaTeXConverter(dpi=960)
+  converter = LaTeXConverter(dpi=1600)
 
   sections = []
   i = 0
@@ -174,7 +174,7 @@ def render_latex (text):
       image_path = "eq{id}.png".format(id=latex_counter)
       with Image.open(image_path) as img:
           img_width, img_height = img.size
-      text_to_be_rendered += "<img src=\"{src}\" valign=\"middle\" height=\"10\" width=\"{resized_width}\"/>".format(src=image_path, resized_width=img_width * (10 / img_height))
+      text_to_be_rendered += "<img src=\"{src}\" valign=\"middle\" height=\"{resized_height}\" width=\"{resized_width}\"/>".format(src=image_path, resized_width=img_width/20, resized_height=img_height/20)
       latex_counter += 1
     else:
       text_to_be_rendered += section
