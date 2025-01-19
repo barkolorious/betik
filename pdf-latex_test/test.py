@@ -1,5 +1,8 @@
 # +--------------------------------------------------------------------+
 # |                          TEST IN PROGRESS                          |
+# | [ ] Turkish characters not rendering correctly (contacted          |
+# |     support.)                                                      |
+# | [X] Inline LaTeX equaton rendering                                 |
 # +--------------------------------------------------------------------+
 
 import os
@@ -72,8 +75,11 @@ class LaTeXConverter:
       wrapped_equation = f"\\[{equation}\\]"
             
     return r"""
-\documentclass[preview]{standalone}
+\documentclass[12pt]{article}
+\special{papersize=3in,5in}
 \usepackage{amsmath,amsfonts,amssymb}
+\pagestyle{empty}
+\setlength{\parindent}{0in}
 \begin{document}
 %s
 \end{document}
@@ -174,23 +180,20 @@ def render_latex (text):
       image_path = "eq{id}.png".format(id=latex_counter)
       with Image.open(image_path) as img:
           img_width, img_height = img.size
-      text_to_be_rendered += "<img src=\"{src}\" valign=\"middle\" height=\"{resized_height}\" width=\"{resized_width}\"/>".format(src=image_path, resized_width=img_width/20, resized_height=img_height/20)
+      text_to_be_rendered += "<img src=\"{src}\" valign=\"-1.5\" height=\"{resized_height}\" width=\"{resized_width}\"/>".format(src=image_path, resized_width=img_width/25, resized_height=img_height/25)
       latex_counter += 1
     else:
       text_to_be_rendered += section
 
-  print(text_to_be_rendered)
+  # print(text_to_be_rendered)
 
   return text_to_be_rendered
 
-sample_text = """
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. $Phasellus$ dapibus venenatis leo ac suscipit. Pellentesque ut nisl eu velit tempus gravida. Sed ut consectetur eros. Integer at hendrerit orci. Donec sagittis hendrerit elementum. Pellentesque sit amet libero nec lacus dictum aliquet quis a mi. Duis interdum nunc non lacus tempus ornare. <i>Etiam enim ante, <b>tincidunt eu nunc et,</b> scelerisque pretium purus. Fusce molestie pellentesque malesuada. Sed imperdiet lectus quam, id dignissim ligula convallis non.</i> $a^2 + b^2 = c^2$
-"""
+sample_text = "Buradaki $(n-k)!$'i sanki seçmediğimiz elemanların farklı sıralamalarını eliyormuş gibi düşünebiliriz"
 
-render_text = render_latex(sample_text)
+render_text = render_latex(sample_text).encode("utf-8")
 
 styleSheet = getSampleStyleSheet()
-# style = styleSheet['BodyText']
 style = ParagraphStyle(
     name="paragraf", 
     fontName='Times', 
@@ -201,9 +204,7 @@ style = ParagraphStyle(
     firstLineIndent=inch/2,
     alignment= TA_JUSTIFY, 
     textColor="black",
-    hyphenationLang="tr_TR",
-    embeddedHyphenation=1,
-    uriWasteReduce=0.3  
+    uriWasteReduce=0.3 
 )
 
 P=Paragraph(render_text,style)
