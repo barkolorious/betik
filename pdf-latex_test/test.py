@@ -1,8 +1,9 @@
 # +--------------------------------------------------------------------+
 # |                          TEST IN PROGRESS                          |
-# | [ ] Turkish characters not rendering correctly (contacted          |
-# |     support.)                                                      |
-# | [X] Inline LaTeX equaton rendering                                 |
+# | [X] Turkish characters not rendering correctly (contacted          |
+# |     support.) (t.y. Andy Robinson)                                 |
+# | [X] Inline LaTeX equation rendering                                |
+# | [ ] No block equation support                                      |
 # +--------------------------------------------------------------------+
 
 import os
@@ -13,14 +14,15 @@ import logging
 import re
 from PIL import Image
 
-from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.styles import ParagraphStyle
-from reportlab.platypus import Paragraph
-from reportlab.pdfgen.canvas import Canvas
-from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.units import cm, inch
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.enums import TA_JUSTIFY
+from reportlab.platypus import Paragraph
+from reportlab.pdfgen.canvas import Canvas
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.pdfmetrics import registerFontFamily
+from reportlab.pdfbase.ttfonts import TTFont
 
 class LaTeXConverter:
   """A class to convert LaTeX equations to PNG images."""
@@ -189,11 +191,11 @@ def render_latex (text):
 
   return text_to_be_rendered
 
-sample_text = "Buradaki $(n-k)!$'i sanki seçmediğimiz elemanların farklı sıralamalarını eliyormuş gibi düşünebiliriz"
-
-render_text = render_latex(sample_text).encode("utf-8")
-
-styleSheet = getSampleStyleSheet()
+pdfmetrics.registerFont(TTFont('Times', 'times.ttf'))
+pdfmetrics.registerFont(TTFont('TimesBd', 'timesbd.ttf'))
+pdfmetrics.registerFont(TTFont('TimesIt', 'timesi.ttf'))
+pdfmetrics.registerFont(TTFont('TimesBI', 'timesbi.ttf'))
+registerFontFamily('Times',normal='Times',bold='TimesBd',italic='TimesIt',boldItalic='TimesBI')
 style = ParagraphStyle(
     name="paragraf", 
     fontName='Times', 
@@ -207,6 +209,10 @@ style = ParagraphStyle(
     uriWasteReduce=0.3 
 )
 
+sample_text = "Buradaki $(n-k)!$'i sanki seçmediğimiz <b>aaa</b> <i>iiii</i> <b><i>aaaaa</i></b> elemanların farklı sıralamalarını eliyormuş gibi düşünebiliriz \\[a^2 + b^2 = c^2\\]"
+
+render_text = render_latex(sample_text).encode("utf-8")
+
 P=Paragraph(render_text,style)
 canv = Canvas('doc.pdf')
 width, height = A4
@@ -215,15 +221,15 @@ margin = 2.5 * cm
 available_width = width - 2 * margin
 available_height = height - 2 * margin
 
-w,h = P.wrap(available_width, available_height)    # find required space
+w, h = P.wrap(available_width, available_height)
 print(w, h, available_width, available_height)
 
 y = (height - margin) - h
 x = margin
 
-if w<=available_width and h<=available_height:
-    P.drawOn(canv, x, y)
-    available_height = available_height - h         # reduce the available height
-    canv.save()
+if w <= available_width and h <= available_height:
+  P.drawOn(canv, x, y)
+  available_height = available_height - h
+  canv.save()
 else:
-    raise ValueError("Not enough room")
+  raise ValueError("Not enough room")
