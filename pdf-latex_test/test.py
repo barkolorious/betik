@@ -3,10 +3,13 @@
 # | [X] Turkish characters not rendering correctly (contacted          |
 # |     support.) (t.y. Andy Robinson)                                 |
 # | [X] Inline LaTeX equation rendering                                |
-# | [ ] No block equation support                                      |
+# | [ ] Block equation support                                         |
 # | [X] Multi-paragraph support                                        |
 # | [ ] Handling paragraphs that doesn't fit in a single page          |
 # | [X] Bullet texts                                                   |
+# | [X] Bibliography formatting                                        |
+# | [ ] Implementing story                                             |
+# | [ ] TÜBİTAK formatted titles                                       |
 # +--------------------------------------------------------------------+
 
 import os
@@ -226,12 +229,30 @@ style2 = ParagraphStyle(
   bulletIndent=-inch/4
 )
 
-sample_text = "Buradaki $(n-k)!$'i sanki seçmediğimiz <b>aaa</b> <i>iiii</i> <b><i>aaaaa</i></b> elemanların farklı sıralamalarını eliyormuş gibi düşünebiliriz \\[a^2 + b^2 = c^2\\] <b>Görsel <seq template=\"%(FigureNo+)s\"/></b> <i>Multi-level templates</i> this is a bullet point.  Spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam ,"
+style3 = ParagraphStyle(
+  name='kaynakca', 
+  fontName='Times', 
+  fontSize=12, 
+  leading=12,
+  leftIndent=0,
+  rightIndent=0,
+  firstLineIndent=-inch/2,
+  alignment= TA_JUSTIFY, 
+  textColor="black",
+  uriWasteReduce=0.3,
+  bulletIndent=-inch/4
+)
+
+sample_text = "Buradaki $(n-k)!$'i sanki seçmediğimiz <b>aaa</b> <i>iiii</i> <b><i>aaaaa</i></b> elemanların farklı sıralamalarını eliyormuş gibi düşünebiliriz \\[a^2 + b^2 = c^2\\] <b>Görsel <seq template=\"%(FigureNo+)s\"/></b> <i>Multi-level templates</i> this is a bullet point.  Spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam , öçşığüÖÇŞİĞÜ"
 render_text = render_latex(sample_text).encode("utf-8")
 bullet_text = "<bullet>&bull;</bullet>this is a bullet point. Spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam"
+bib_text = "Akgül, B., Yaşa, S., & Hergül, B. (2018). Unmanned aerial vehicles for gathering the news media industry fast development of methods. <i>Innovation and Global Issues 3: Congress Book</i>, 72-87."
+bib_text2 = """Alkouz, B., & Bouguettaya, A. (2021). Formation-based selection of drone swarm services. <i>MobiQuitous 2020 - 17th EAI International Conference on Mobile and Ubiquitous Systems: Computing, Networking and Services</i>, 386-394. <link href="https://doi.org/10.1145/3448891.3448899">https://doi.org/10.1145/3448891.3448899</link>"""
 
 P=Paragraph(render_text,style)
 P2 = Paragraph(bullet_text,style2)
+P3 = Paragraph(bib_text,style3)
+P4 = Paragraph(bib_text2,style3)
 canv = Canvas('doc.pdf')
 width, height = A4
 margin = 2.5 * cm
@@ -257,13 +278,32 @@ x = margin
 P2.drawOn(canv, x + inch/2, y)
 available_height = available_height - h2
 #  ------------------------------------------------
-w2, h2 = P2.wrap(available_width - inch/2, available_height)
+w2, h2 = P2.wrap(available_width - 3 * inch / 4, available_height)
 print(w2, h2, available_width, available_height)
 
 y = (available_height + margin) - h2
 x = margin
 
-P2.drawOn(canv, x + inch/2, y)
+P2.drawOn(canv, x + 3 * inch / 4, y)
 available_height = available_height - h2
+#  ------------------------------------------------
+w3, h3 = P3.wrap(available_width - inch/2, available_height)
+print(w3, h3, available_width, available_height)
+
+y = (available_height + margin) - h3
+x = margin
+
+P3.drawOn(canv, x + inch/2, y)
+available_height = available_height - h3
+#  ------------------------------------------------
+w3, h3 = P4.wrap(available_width - inch/2, available_height)
+print(w3, h3, available_width, available_height)
+
+y = (available_height + margin) - h3
+x = margin
+
+P4.drawOn(canv, x + inch/2, y)
+available_height = available_height - h3
+
 
 canv.save()
