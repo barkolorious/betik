@@ -11,6 +11,7 @@
 # | [X] Bibliography formatting                                        |
 # | [ ] TÜBİTAK formatted titles                                       |
 # | [X] Figure numbering                                               |
+# | [ ] BaseDocTemplate implementation                                 |
 # +--------------------------------------------------------------------+
 
 import os
