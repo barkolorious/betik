@@ -4,6 +4,7 @@
 # |     support.) (t.y. Andy Robinson)                                 |
 # | [X] Inline LaTeX equation rendering                                |
 # | [ ] Block equation support                                         |
+# | [ ] Tall inline equation support                                   |
 # | [X] Multi-paragraph support                                        |
 # | [ ] Handling paragraphs that doesn't fit in a single page          |
 # | [X] Bullet texts                                                   |
@@ -243,7 +244,7 @@ style3 = ParagraphStyle(
   bulletIndent=-inch/4
 )
 
-sample_text = "Buradaki $(n-k)!$'i sanki seçmediğimiz <b>aaa</b> <i>iiii</i> <b><i>aaaaa</i></b> elemanların farklı sıralamalarını eliyormuş gibi düşünebiliriz \\[a^2 + b^2 = c^2\\] <b>Görsel <seq template=\"%(FigureNo+)s\"/></b> <i>Multi-level templates</i> this is a bullet point.  Spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam , öçşığüÖÇŞİĞÜ"
+sample_text = "Buradaki $(n-k)!$'i sanki seçmediğimiz <b>aaa</b> <i>iiii</i> <b><i>aaaaa</i></b> elemanların farklı sıralamalarını eliyormuş gibi düşünebiliriz \\[a^2 + b^2 = c^2\\] <b>Görsel <seq template=\"%(FigureNo+)s\"/></b> <i>Multi-level templates</i> this is a bullet point.  Spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam , öçşığüÖÇŞİĞÜ $\\mathcal{F}\\{f\\}(\\xi) = \\hat{f}(\\xi) = \\displaystyle \\int_{-\\infty}^{\\infty} f(x) \\cdot e^{-i 2 \\pi \\xi x} \\, \\mathrm{d}x$"
 render_text = render_latex(sample_text).encode("utf-8")
 bullet_text = "<bullet>&bull;</bullet>this is a bullet point. Spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam"
 bib_text = "Akgül, B., Yaşa, S., & Hergül, B. (2018). Unmanned aerial vehicles for gathering the news media industry fast development of methods. <i>Innovation and Global Issues 3: Congress Book</i>, 72-87."
