@@ -10,7 +10,7 @@
   - [X] Figure numbering
   - [X] SimpleDocTemplate implementation
   - [X] story implementation
-  - [ ] Image handling
+  - [X] Image handling
 
 TÜBİTAK 2204 Proje Yarışmalarında kullanılması için rapor yazma uygulaması.
 Reportlab üzerine kurulmuştur.
