@@ -64,12 +64,12 @@ T_proje_baslik=Table(proje_baslik,
                             ('LEADING',       (0, 0), (-1, -1), 18),
                             ('VALIGN',        (0, 0), (-1, -1), 'TOP'),
                             ('TOPPADDING',    (0, 0), (-1, -1), 0),
-                            ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
+                            ('BOTTOMPADDING', (0, 0), (-1, -2), 0),
                             ('RIGHTPADDING',  (0, 0), (-1, -1), 0),
-                            ('LEFTPADDING',   (0, 0), (-1, -1), 0)],
-                     colWidths=[106, 6, avaliable_width - 122]
+                            ('LEFTPADDING',   (0, 0), (-1, -1), 0)]
                     )
-T_proje_baslik.hAlign = TA_LEFT
+T_proje_baslik.hAlign=TA_LEFT
+T_proje_baslik._argW[2]=avaliable_width-122
 
 liste = ListFlowable(
   [

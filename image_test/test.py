@@ -31,7 +31,7 @@ bosluk = Spacer(width=page_width, height=inch/8)
 
 sample_text = "Buradaki $(n-k)!$'i sanki seçmediğimiz <b>aaa</b> <i>iiii</i> <b><i>aaaaa</i></b> elemanların farklı sıralamalarını eliyormuş gibi düşünebiliriz \\[a^2 + b^2 = c^2\\] <b>Görsel <seq template=\"%(FigureNo+)s\"/></b> <i>Multi-level templates</i> this is a bullet point.  Spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam , öçşığüÖÇŞİĞÜ"
 
-image_path = "aaaaa.png"
+image_path = "img1.png"
 with PILImg.open(image_path) as img:
   img_width, img_height = img.size
   if img_width > img_height:
@@ -40,25 +40,36 @@ with PILImg.open(image_path) as img:
   else:
     resized_height = avaliable_height * .33
     resized_width = img_width / img_height * resized_height
-I_logo = Image("aaaaa.png", width=resized_width, height=resized_height)
-P_gorsel_metin = Paragraph(text="<b>Görsel <seq template=\"%(FigureNo+)s\"/></b> <i>Multi-level templates</i>", style=stiller['GorselMetin'])
+I_gorsel_1=Image(image_path, width=resized_width, height=resized_height)
+P_gorsel_metin_1=Paragraph(text="<b>Görsel <seq template=\"%(FigureNo+)s\"/></b> <i>barkolorious</i>", style=stiller['GorselMetin'])
+gorsel_1=[[I_gorsel_1], [P_gorsel_metin_1]]
+T_gorsel_1=Table(gorsel_1,style=[('ALIGN', (0, 0), (-1, -1), 'CENTER'),('TOPPADDING', (0, 1), (0, 1), 0), ('BOTTOMPADDING', (0, 0), (0, 0), 0)])
+T_gorsel_1.hAlign = TA_JUSTIFY
 
-proje_baslik=[[I_logo],  
-              [P_gorsel_metin]]
-T_proje_baslik=Table(proje_baslik, 
-                     style=[('ALIGN',         (0, 0), (-1, -1), 'CENTER'), 
-                            ('TOPPADDING',    (0, 1), (0, 1), 0),
-                            ('BOTTOMPADDING', (0, 0), (0, 0), 0)],
-                    )
-T_proje_baslik.hAlign = TA_JUSTIFY
+
+image_path = "img2.png"
+with PILImg.open(image_path) as img:
+  img_width, img_height = img.size
+  if img_width > img_height:
+    resized_width = avaliable_width * .5
+    resized_height = img_height / img_width * resized_width
+  else:
+    resized_height = avaliable_height * .33
+    resized_width = img_width / img_height * resized_height
+I_gorsel_2 = Image(image_path, width=resized_width, height=resized_height)
+P_gorsel_metin_2 = Paragraph(text="<b>Görsel <seq template=\"%(FigureNo+)s\"/></b> <i>AEROP</i>", style=stiller['GorselMetin'])
+gorsel_2=[[I_gorsel_2], [P_gorsel_metin_2]]
+T_gorsel_2=Table(gorsel_2,style=[('ALIGN', (0, 0), (-1, -1), 'CENTER'),('TOPPADDING', (0, 1), (0, 1), 0), ('BOTTOMPADDING', (0, 0), (0, 0), 0)])
+T_gorsel_2.hAlign = TA_JUSTIFY
 
 
 
 story = []
 
-# story.append(I_logo)
-story.append(T_proje_baslik)
+# story.append(I_gorsel_1)
+story.append(T_gorsel_1)
 story.append(Paragraph(sample_text, style=stiller['Paragraf']))
+story.append(T_gorsel_2)
 
 doc = SimpleDocTemplate('doc.pdf', pagesize=A4, leftMargin=page_margin, rightMargin=page_margin, topMargin=page_margin, bottomMargin=page_margin, allowSplitting=1)
 doc.build(story)
