@@ -41,6 +41,6 @@ page_width, page_height = A4
 bosluk = Spacer(width=page_width, height=inch/8)
 story.append(Paragraph(sample_text, style=stiller['Paragraf']))
 story.append(t)
-doc = SimpleDocTemplate('doc.pdf', pagesize = A4, leftMargin=inch, rightMargin=inch, topMargin=inch, bottomMargin=inch, allowSplitting=1,)
+doc = SimpleDocTemplate('doc.pdf', pagesize = A4, leftMargin=2.5*cm, rightMargin=2.5*cm, topMargin=2.5*cm, bottomMargin=2.5*cm, allowSplitting=1)
 
 doc.build(story)

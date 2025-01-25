@@ -1,19 +1,3 @@
-# +--------------------------------------------------------------------+
-# |                          TEST IN PROGRESS                          |
-# | [X] Turkish characters not rendering correctly (contacted          |
-# |     support.) (t.y. Andy Robinson)                                 |
-# | [X] Inline LaTeX equation rendering                                |
-# | [ ] Block equation support                                         |
-# | [ ] Tall inline equation support                                   |
-# | [X] Multi-paragraph support                                        |
-# | [X] Handling paragraphs that doesn't fit in a single page          |
-# | [X] Bullet texts                                                   |
-# | [X] Bibliography formatting                                        |
-# | [ ] TÜBİTAK formatted titles                                       |
-# | [X] Figure numbering                                               |
-# | [X] SimpleDocTemplate implementation                               |
-# +--------------------------------------------------------------------+
-
 import os, tempfile, shutil, logging, re
 from subprocess import Popen, PIPE, DEVNULL
 from PIL import Image
