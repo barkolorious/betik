@@ -33,15 +33,16 @@ bosluk = Spacer(width=page_width, height=inch/8)
 
 sample_text = "Buradaki $(n-k)!$'i sanki seçmediğimiz <b>aaa</b> <i>iiii</i> <b><i>aaaaa</i></b> elemanların farklı sıralamalarını eliyormuş gibi düşünebiliriz \\[a^2 + b^2 = c^2\\] <b>Görsel <seq template=\"%(FigureNo+)s\"/></b> <i>Multi-level templates</i> this is a bullet point.  Spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam spam , öçşığüÖÇŞİĞÜ"
 
-tablo=[[Paragraph(text="Ödül", style=stiller['TabloBaslik']), Paragraph(text="Fonksiyon", style=stiller['TabloBaslik'])], 
-       [Paragraph(text="Kohezyon", style=stiller['KalinMetin']), Paragraph(text="R = -\\gamma_1 \\cdot \\max ...", style=stiller['Metin'])],
-       [Paragraph(text="Çarpışma Miktarı", style=stiller['KalinMetin']), Paragraph(text="R = -\\gamma_1 \\cdot \\max ...", style=stiller['Metin'])],
-       [Paragraph(text="Harcanan Toplam Enerji", style=stiller['KalinMetin']), Paragraph(text="R = -\\gamma_1 \\cdot \\max ...", style=stiller['Metin'])]]
+tablo=[['',Paragraph(text="Ödül", style=stiller['TabloBaslik']), Paragraph(text="Fonksiyon", style=stiller['TabloBaslik']), ''], 
+       ['',Paragraph(text="Kohezyon", style=stiller['KalinMetin']), Paragraph(text="R = -\\gamma_1 \\cdot \\max ...", style=stiller['Metin']), ''],
+       ['',Paragraph(text="Çarpışma Miktarı", style=stiller['KalinMetin']), Paragraph(text="R = -\\gamma_1 \\cdot \\max ...", style=stiller['Metin']), ''],
+       ['',Paragraph(text="Harcanan Toplam Enerji", style=stiller['KalinMetin']), Paragraph(text="R = -\\gamma_1 \\cdot \\max ...", style=stiller['Metin']), '']]
 T_tablo=Table(tablo,style=[('ALIGN', (0, 0), (-1, -1), 'CENTER'),
                            ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
                            ('LINEABOVE', (0,  0), (-1,  0), 1, 'black'),
-                           ('LINEBELOW', (0,  0), (-1, -1), 1, 'black')], spaceAfter=inch/8, spaceBefore=inch/8)
-T_tablo.hAlign = TA_JUSTIFY
+                           ('LINEBELOW', (1,  0), (-2,  -1), 1, 'black'),
+                           ('LINEBELOW', (0,  -1), (-1,  -1), 1, 'black')], spaceAfter=inch/8, spaceBefore=inch/8)
+T_tablo._argW[0] = T_tablo._argW[3] = inch/8
 P_tablo_metin=Paragraph(text="<b>Tablo <seq template=\"%(TableNo+)s\"/></b> <i>bişiler işte</i>", style=stiller['TabloMetin'])
 tablo_tum=[[T_tablo], [P_tablo_metin]]
 T_tablo_tum=Table(tablo_tum,style=[('ALIGN', (0, 0), (-1, -1), 'CENTER'),('TOPPADDING', (0, 1), (0, 1), 0), ('BOTTOMPADDING', (0, 0), (0, 0), 0)], spaceAfter=inch/8, spaceBefore=inch/8)
