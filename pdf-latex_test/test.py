@@ -235,7 +235,7 @@ bullet_text = "<bullet>&bull;</bullet>this is a bullet point. | | | | | | | | | 
 bib_text = "Akgül, B., Yaşa, S., & Hergül, B. (2018). Unmanned aerial vehicles for gathering the news media industry fast development of methods. <i>Innovation and Global Issues 3: Congress Book</i>, 72-87."
 bib_text2 = """Alkouz, B., & Bouguettaya, A. (2021). Formation-based selection of drone swarm services. <i>MobiQuitous 2020 - 17th EAI International Conference on Mobile and Ubiquitous Systems: Computing, Networking and Services</i>, 386-394. <link href="https://doi.org/10.1145/3448891.3448899">https://doi.org/10.1145/3448891.3448899</link>"""
 
-P=Paragraph(render_text,style)
+P = Paragraph(render_text,style)
 P2 = Paragraph(bullet_text,style2)
 P3 = Paragraph(bib_text,style3)
 P4 = Paragraph(bib_text2,style3)

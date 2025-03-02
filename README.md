@@ -11,7 +11,7 @@
   - [X] SimpleDocTemplate implementation
   - [X] story implementation
   - [X] Image handling
-  - [X] Table handling
+  - [ ] Table handling
 
 TÜBİTAK 2204 Proje Yarışmalarında kullanılması için rapor yazma uygulaması.
 Reportlab üzerine kurulmuştur.
