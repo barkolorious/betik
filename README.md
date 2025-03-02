@@ -1,4 +1,4 @@
-![Banner](banner.png)
+![Banner](banner2.png)
 
 
   - [X] Turkish characters not rendering correctly (contacted support. (t.y. Andy Robinson))
