@@ -1,3 +1,6 @@
+![banner.png]
+
+
   - [X] Turkish characters not rendering correctly (contacted support. (t.y. Andy Robinson))
   - [X] Inline LaTeX equation rendering
   - [ ] Block equation support
